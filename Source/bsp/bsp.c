@@ -98,22 +98,22 @@ void BSP_init(void) {
 	SystemInit();         /* initialize STM32 system (clock, PLL and Flash) */
 
 	/* initialize LEDs, Key Button, and LCD on STM322XX-EVAL board */
-	BSP_ButtonAndLED_Init();
+	// alu: TODO BSP_ButtonAndLED_Init();
 
 	/* initialize the Serial for printfs to the serial port */
-	BSP_USART_Init();
+	// alu: TODO BSP_USART_Init();
 
 	/* initialize the EXTI Line0 interrupt used for testing */
-	BSP_EXTI_Init();
+	// alu: TODO BSP_EXTI_Init();
 
 	//TODO: Remove this once we go to real board
-	BSP_Display_Init(); 	/* initialize the LCD */
+	// alu: TODO BSP_Display_Init(); 	/* initialize the LCD */
 
 	/* initialize the ETH GPIO */
-	ETH_GPIO_Config();
+	// alu: TODO ETH_GPIO_Config();
 
 	/* initialize the ETH MACDMA */
-	ETH_MACDMA_Config();
+	// alu: TODO ETH_MACDMA_Config();
 
 	QS_OBJ_DICTIONARY(&l_SysTick_Handler);
 }
