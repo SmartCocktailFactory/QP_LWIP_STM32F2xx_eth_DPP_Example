@@ -53,6 +53,7 @@ int main(void) {
     uint8_t n;
 
     Philo_ctor();             /* instantiate all Philosopher active objects */
+#if 0
     Table_ctor();                    /* instantiate the Table active object */
     LwIPMgr_ctor();           /* instantiate all LwIP-Manager active object */
 
@@ -89,6 +90,6 @@ int main(void) {
                   l_tableQueueSto, Q_DIM(l_tableQueueSto),
                   (void *)0, 0, (QEvent *)0);
     QF_run();                                     /* run the QF application */
-
+#endif
     return 0;
 }
