@@ -48,17 +48,22 @@ static union MediumEvents {
     /* ... other event types to go into this pool */
 } l_medPoolSto[4];                     /* storage for the medium event pool */
 
+const char myBuf[50000] = {0, 1, 2, 3, 4, 5};
+volatile char myChar;
 /*..........................................................................*/
 int main(void) {
     uint8_t n;
-
+    int i = 0;
+    for (i = 0; i<50000; i++)
+      myChar += myBuf[i];
     Philo_ctor();             /* instantiate all Philosopher active objects */
-#if 0
+
     Table_ctor();                    /* instantiate the Table active object */
+#if 0
     LwIPMgr_ctor();           /* instantiate all LwIP-Manager active object */
-
+#endif
     BSP_init();                     /* initialize the Board Support Package */
-
+#if 0
     QF_init();     /* initialize the framework and the underlying RT kernel */
 
                                                   /* object dictionaries... */
