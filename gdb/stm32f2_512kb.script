@@ -1,0 +1,15 @@
+
+set remote hardware-breakpoint-limit 6
+set remote hardware-watchpoint-limit 4
+set remotetimeout 60
+target remote localhost:3333
+monitor halt
+monitor poll
+
+monitor flash probe 0
+monitor flash protect 0 0 7 off
+monitor reset halt
+monitor flash erase_sector 0 0 7
+monitor flash write_image Debug/QP_LWIP_STM32F2xx_eth_DPP_Example.elf
+monitor flash protect 0 0 7 on
+monitor soft_reset_halt
