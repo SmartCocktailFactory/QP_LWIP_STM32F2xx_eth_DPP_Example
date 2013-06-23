@@ -48,13 +48,13 @@ static union MediumEvents {
     /* ... other event types to go into this pool */
 } l_medPoolSto[4];                     /* storage for the medium event pool */
 
-const char myBuf[50000] = {0, 1, 2, 3, 4, 5};
+const char myBuf[100000] = {0, 1, 2, 3, 4, 5};
 volatile char myChar;
 /*..........................................................................*/
 int main(void) {
     uint8_t n;
     int i = 0;
-    for (i = 0; i<50000; i++)
+    for (i = 0; i<100000; i++)
       myChar += myBuf[i];
     Philo_ctor();             /* instantiate all Philosopher active objects */
 

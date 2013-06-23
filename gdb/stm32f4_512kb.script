@@ -19,9 +19,10 @@
 ##
 ################################################################################
 
-set tdesc filename gdb/workaround.xml
+#set tdesc filename gdb/workaround.xml
 set remote hardware-breakpoint-limit 6
 set remote hardware-watchpoint-limit 4
+set remotetimeout 60
 target remote localhost:3333
 monitor halt
 monitor poll
