@@ -34,7 +34,6 @@
 #include "stm32f2xx.h"
 #include "stm32_eval.h"
 #include "stm322xg_eval.h"
-#include "stm322xg_eval_lcd.h"
 #include "qp_port.h"
 #include "dpp.h"
 #include "bsp.h"
@@ -106,9 +105,6 @@ void BSP_init(void) {
 	/* initialize the EXTI Line0 interrupt used for testing */
 	// alu: TODO BSP_EXTI_Init();
 
-	//TODO: Remove this once we go to real board
-	// alu: TODO BSP_Display_Init(); 	/* initialize the LCD */
-
 	/* initialize the ETH GPIO */
 	// alu: TODO ETH_GPIO_Config();
 
@@ -161,15 +157,6 @@ void BSP_EXTI_Init(void) {
 	exti_init.EXTI_Line    = EXTI_Line0;
 	exti_init.EXTI_LineCmd = ENABLE;
 	EXTI_Init(&exti_init);
-}
-
-/*..........................................................................*/
-void BSP_Display_Init(void) {
-
-    STM322xG_LCD_Init();                              /* initialize the LCD */
-    LCD_Clear(White);                                      /* clear the LCD */
-    LCD_SetBackColor(Grey);
-    LCD_SetTextColor(Black);
 }
 
 /*..........................................................................*/

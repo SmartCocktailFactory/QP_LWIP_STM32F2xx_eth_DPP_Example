@@ -123,7 +123,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry excluding="Source|FreeRTOS|STM32F2xx_StdPeriph_Lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="qpc/qf/source/qvanilla.c|lwip/src/core/ipv6|lwip/test|qpc/qs|bsp/CMSIS/Device/ST/STM32F2xx/Source|qpc/ports/arm-cortex/qk/iar|qpc/ports/arm-cortex/vanilla|qpc/ports/tms320c55x|qpc/ports/tms320c28x|qpc/ports/rx|qpc/ports/pic24_dspic|qpc/ports/pic18|qpc/ports/nios2|qpc/ports/msp430|qpc/ports/m16c|qpc/ports/lint|qpc/ports/h8|qpc/ports/coldfire|qpc/ports/avr-xmega|qpc/ports/avr|qpc/ports/arm|qpc/ports/80x86|qpc/ports/80251|qpc/examples|qpc/doxygen" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Source"/>
+						<entry excluding="bsp/stm322xg_eval|qpc/qf/source/qvanilla.c|lwip/src/core/ipv6|lwip/test|qpc/qs|bsp/CMSIS/Device/ST/STM32F2xx/Source|qpc/ports/arm-cortex/qk/iar|qpc/ports/arm-cortex/vanilla|qpc/ports/tms320c55x|qpc/ports/tms320c28x|qpc/ports/rx|qpc/ports/pic24_dspic|qpc/ports/pic18|qpc/ports/nios2|qpc/ports/msp430|qpc/ports/m16c|qpc/ports/lint|qpc/ports/h8|qpc/ports/coldfire|qpc/ports/avr-xmega|qpc/ports/avr|qpc/ports/arm|qpc/ports/80x86|qpc/ports/80251|qpc/examples|qpc/doxygen" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Source"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
