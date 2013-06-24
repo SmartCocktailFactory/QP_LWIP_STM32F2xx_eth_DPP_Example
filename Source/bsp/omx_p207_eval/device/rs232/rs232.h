@@ -3,18 +3,18 @@
                               All Rights Reserved
  ****************************************************************************************
 
-  DESCRIPTION:        Control LED's on Olimex P207 eval board.
+  DESCRIPTION:        Control RS-232 serial COM port on Olimex P207 eval board.
 
 
  ****************************************************************************************
  ****************************************************************************************/
-#ifndef LED_H_
-#define LED_H_
+#ifndef RS_232_H_
+#define RS_232_H_
 
 /****************************************************************************************
  Includes
 *****************************************************************************************/
-#include "led.h"
+
 
 /****************************************************************************************
  Defines
@@ -29,13 +29,7 @@
 /****************************************************************************************
  Structs and typedefs
 *****************************************************************************************/
-typedef enum OmxEvalLed
-{
-  LED_1 = 0,
-  LED_2,
-  LED_3,
-  LED_4
-} OmxEvalLed;
+
 
 /****************************************************************************************
  Macros
@@ -46,34 +40,13 @@ typedef enum OmxEvalLed
  Public function declarations
 *****************************************************************************************/
 /**
- * Initialize the LED's on the Olimex eval board.
+ * Initialize the RS-232 serial ports on the Olimex eval board.
  */
-void omxEval_led_init(void);
+void omxEval_rs232_init(void);
 
 /**
- * Switch selected LED on.
- *
- * @param led the LED to be switched on.
+ * Test RS-232 code (using an endless loop).
  */
-void omxEval_led_on(OmxEvalLed led);
+void omxEval_rs232_test(void);
 
-/**
- * Switch selected LED off.
- *
- * @param led the LED to be switched off.
- */
-void omxEval_led_off(OmxEvalLed led);
-
-/**
- * Toggle selected LED.
- *
- * @param led the LED to be toggled.
- */
-void omxEval_led_toggle(OmxEvalLed led);
-
-/**
- * Test LED code.
- */
-void omxEval_led_test(void);
-
-#endif /* LED_H_ */
+#endif  /* RS_232_H_ */
