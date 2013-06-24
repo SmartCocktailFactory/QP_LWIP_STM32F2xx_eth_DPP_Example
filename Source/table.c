@@ -29,7 +29,6 @@
 #include "dpp.h"                   /* application events and active objects */
 #include "bsp.h"                       /* Board Support Package header file */
 #include "stm32_eval.h"
-#include "stm322xg_eval_lcd.h"
 #include <stdio.h>
 
 
@@ -204,22 +203,7 @@ QState Table_serving(Table *me, QEvent const *e) {
 /* helper functions for the display ........................................*/
                      
 void Table_displayInit(Table *me) {
-    BSP_Display_Init();
-	LCD_DisplayStringLine(Line0, "   Quantum Leaps    ");
-    LCD_DisplayStringLine(Line1, "     DPP example    ");
-    LCD_DisplayStringLine(Line2, "       QP/C (QK)    ");
-    LCD_DisplayStringLine(Line2, QF_getVersion());
-    LCD_SetBackColor(White);
-	LCD_DisplayStringLine(Line3, "IP :"                 );
-    LCD_DisplayStringLine(Line4, "CGI:"                 );
-    LCD_DisplayStringLine(Line5, "UDP:"                 );
-    LCD_DisplayStringLine(Line6, "DPP:"                 );
-    LCD_SetBackColor(Black);
-    LCD_SetTextColor(Yellow);
-    LCD_DisplayStringLine(Line9, "  state-machine.com ");
-    LCD_SetBackColor(Blue);
-    LCD_SetTextColor(White);
-    LCD_DisplayStringLine(Line6, "    0 ,1 ,2 ,3 ,4   ");
+    /* init LCD display here, if available */
 
     if (QS_INIT((void *)0) == 0) {    /* initialize the QS software tracing */
         Q_ERROR();
@@ -227,9 +211,12 @@ void Table_displayInit(Table *me) {
 
     QS_OBJ_DICTIONARY(&l_SysTick_Handler);
 }
+
 /*..........................................................................*/
 static void Table_displayPhilStat(Table *me, uint8_t n, char const *stat) {
-    LCD_DisplayChar(Line6, (3*16*n + 5*16), stat[0]);
+#if 0  /* alu: disabled because no LCD display is available */
+	LCD_DisplayChar(Line6, (3*16*n + 5*16), stat[0]);
+#endif
     QS_BEGIN(PHILO_STAT, AO_Philo[n])  /* application-specific record begin */
         QS_U8(1, n);                                  /* Philosopher number */
         QS_STR(stat);                                 /* Philosopher status */
@@ -237,20 +224,27 @@ static void Table_displayPhilStat(Table *me, uint8_t n, char const *stat) {
 }
 /*..........................................................................*/
 static void Table_displayIPAddr(Table *me, char const *ip_addr) {
+#if 0  /* alu: disabled because no LCD display is available */
     LCD_DisplayStringLine(Line3, ip_addr                 );
+#endif
 }
 /*..........................................................................*/
 void Table_displayCgiText(Table *me, char const *text) {
+#if 0  /* alu: disabled because no LCD display is available */
     LCD_DisplayStringLine(Line4, text                 );
+#endif
     QS_BEGIN(CGI_TEXT, 0)              /* application-specific record begin */
         QS_STR(text);                                          /* User text */
     QS_END()
 }
 /*..........................................................................*/
 void Table_displayUdpText(Table *me, char const *text) {
-    LCD_DisplayStringLine(Line5, text                 );
+#if 0  /* alu: disabled because no LCD display is available */
+   LCD_DisplayStringLine(Line5, text                 );
+#endif
     QS_BEGIN(UDP_TEXT, 0)              /* application-specific record begin */
         QS_STR(text);                                          /* User text */
     QS_END()
 }
+
 

@@ -327,17 +327,6 @@ void QS_onFlush(void) {
 /*--------------------------------------------------------------------------*/
 
 /*..........................................................................*/
-void BSP_displyPhilStat(uint8_t n, char const *stat) {
-
-    LCD_DisplayChar(Line5, (3*16*n + 5*16), stat[0]);
-
-    QS_BEGIN(PHILO_STAT, AO_Philo[n])  /* application-specific record begin */
-        QS_U8(1, n);                                  /* Philosopher number */
-        QS_STR(stat);                                 /* Philosopher status */
-    QS_END()
-}
-
-/*..........................................................................*/
 /* sys_now() is used in the lwIP stack
 */
 uint32_t sys_now(void) {
