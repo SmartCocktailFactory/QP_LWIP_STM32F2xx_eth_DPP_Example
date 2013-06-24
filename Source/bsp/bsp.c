@@ -34,6 +34,7 @@
 #include "stm32f2xx.h"
 #include "stm32_eval.h"
 #include "stm322xg_eval.h"
+#include <stm32_p207_eval/device/led/led.h>
 #include "qp_port.h"
 #include "dpp.h"
 #include "bsp.h"
@@ -95,6 +96,9 @@ void EXTI0_IRQHandler(void) {
 /*..........................................................................*/
 void BSP_init(void) {
 	SystemInit();         /* initialize STM32 system (clock, PLL and Flash) */
+
+	/* initialize LEDs on Olimex P207 eval board */
+	omxEval_led_init();
 
 	/* initialize LEDs, Key Button, and LCD on STM322XX-EVAL board */
 	// alu: TODO BSP_ButtonAndLED_Init();
