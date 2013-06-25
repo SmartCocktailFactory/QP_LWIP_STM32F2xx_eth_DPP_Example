@@ -45,8 +45,13 @@
 void omxEval_rs232_init(void);
 
 /**
- * Test RS-232 code (using an endless loop).
+ * Test RS-232 code, transmit direction (using an endless loop).
  */
-void omxEval_rs232_test(void);
+void omxEval_rs232_testTx(void);
+
+/**
+ * Test RS-232 code, receive direction (using an endless loop).
+ */
+void omxEval_rs232_testRx(void);
 
 #endif  /* RS_232_H_ */

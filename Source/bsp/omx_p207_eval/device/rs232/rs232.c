@@ -109,16 +109,33 @@ void omxEval_rs232_init(void)
   USART_Cmd(OMX_EVAL_COM2, ENABLE);
 }
 
-void omxEval_rs232_test(void)
+void omxEval_rs232_testTx(void)
 {
   while(1) {
     if ((OMX_EVAL_COM2->SR & USART_FLAG_TXE) != 0) {              /* check if transmit data register is empty */
       uint16_t b = 0;
-      char * pB = &b;
+      char * pB = (char*)(&b);
       *pB = 'a';      /* this character actually gets written to the serial port */
       *(pB+1) = 'b';  /* this character is NOT written to the serial port */
 
       OMX_EVAL_COM2->DR = (b & 0xFF);      /* put data to be sent into the DR register */
+    }
+  }
+}
+
+void omxEval_rs232_testRx(void)
+{
+  while(1) {
+    if ((OMX_EVAL_COM2->SR & USART_FLAG_RXNE) != 0) {              /* check if receive data register is not empty */
+      uint16_t b = 0;
+      char * pB0 = (char*)(&b);
+      char b0 = 0;
+      char b1 = 0;
+
+      b = OMX_EVAL_COM2->DR;      /* read data from the DR register */
+
+      b0 = *pB0;  /* character is received here */
+      b1 = *(pB0 + 1);  /* no data */
     }
   }
 }
