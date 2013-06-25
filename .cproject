@@ -48,6 +48,7 @@
 									<listOptionValue builtIn="false" value="STM32F2XX"/>
 									<listOptionValue builtIn="false" value="USE_STM3220F_EVAL"/>
 									<listOptionValue builtIn="false" value="GCC_ARMCM3"/>
+									<listOptionValue builtIn="false" value="Q_SPY"/>
 								</option>
 								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.include.paths.1485060178" name="Include paths (-I)" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Source/bsp/CMSIS/Device/ST/STM32F2xx/Include}&quot;"/>
@@ -122,7 +123,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="qpc/ports/avr-xmega|qpc/ports/arm|qpc/ports/tms320c28x|qpc/ports/lint|qpc/examples|qpc/ports/pic24_dspic|bsp/Common|qpc/qf/source/qvanilla.c|bsp/stm322xg_eval|qpc/ports/arm-cortex/vanilla|qpc/ports/pic18|qpc/ports/h8|qpc/ports/80x86|lwip/src/core/ipv6|qpc/ports/m16c|qpc/ports/rx|lwip/test|qpc/doxygen|qpc/qs|qpc/ports/tms320c55x|qpc/ports/80251|bsp/CMSIS/Device/ST/STM32F2xx/Source|bsp/stm32_eval.c|qpc/ports/avr|qpc/ports/coldfire|qpc/ports/msp430|qpc/ports/arm-cortex/qk/iar|qpc/ports/nios2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Source"/>
+						<entry excluding="qpc/ports/avr-xmega|qpc/ports/arm|qpc/ports/tms320c28x|qpc/ports/lint|qpc/examples|qpc/ports/pic24_dspic|bsp/Common|qpc/qf/source/qvanilla.c|bsp/stm322xg_eval|qpc/ports/arm-cortex/vanilla|qpc/ports/pic18|qpc/ports/h8|qpc/ports/80x86|lwip/src/core/ipv6|qpc/ports/m16c|qpc/ports/rx|lwip/test|qpc/doxygen|qpc/ports/tms320c55x|qpc/ports/80251|bsp/CMSIS/Device/ST/STM32F2xx/Source|bsp/stm32_eval.c|qpc/ports/avr|qpc/ports/coldfire|qpc/ports/msp430|qpc/ports/arm-cortex/qk/iar|qpc/ports/nios2" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Source"/>
 						<entry excluding="Source|FreeRTOS|STM32F2xx_StdPeriph_Lib" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
@@ -142,6 +143,8 @@
 	<storageModule moduleId="refreshScope" versionNumber="1">
 		<resource resourceType="PROJECT" workspacePath="/QP_LWIP_STM32F2xx_eth_DPP_Example"/>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
@@ -227,6 +230,49 @@
 				</scannerInfoProvider>
 			</profile>
 		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.elf.debug.950416220;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.elf.debug.950416220.864752880;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.elf.c.compiler.debug.181507854;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.434568577">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
+			<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="true"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="gcc" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+			<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="true"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="gcc" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+			<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="true"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp" command="g++" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+			<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="true"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.c" command="gcc" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.elf.debug.950416220;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.elf.debug.950416220.;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.elf.assembler.debug.1377932807;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.139491760">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
 			<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
@@ -270,7 +316,48 @@
 				</scannerInfoProvider>
 			</profile>
 		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.elf.debug.950416220;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.elf.debug.950416220.864752880;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.elf.assembler.debug.1599514428;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1907322530">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
+			<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="true"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="gcc" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+			<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="true"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="gcc" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+			<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="true"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp" command="g++" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+			<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="true"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.c" command="gcc" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
