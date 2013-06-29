@@ -209,7 +209,9 @@ void Table_displayInit(Table *me) {
         Q_ERROR();
     }
 
+#if 0  /* alu: disabled */
     QS_OBJ_DICTIONARY(&l_SysTick_Handler);
+#endif
 }
 
 /*..........................................................................*/

@@ -32,7 +32,7 @@
 /* Private function prototypes -----------------------------------------------*/
 
 
-#define MII_MODE
+#define RMII_MODE
 /* Uncomment the define below to clock the PHY from external 25MHz crystal (only for MII mode) */
 #ifdef 	MII_MODE
  #define PHY_CLOCK_MCO

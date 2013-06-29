@@ -59,13 +59,15 @@ int main(void) {
     LwIPMgr_ctor();           /* instantiate all LwIP-Manager active object */
 #endif
     BSP_init();                     /* initialize the Board Support Package */
-#if 0
+
     QF_init();     /* initialize the framework and the underlying RT kernel */
 
                                                   /* object dictionaries... */
     QS_OBJ_DICTIONARY(l_smlPoolSto);
     QS_OBJ_DICTIONARY(l_medPoolSto);
+#if 0
     QS_OBJ_DICTIONARY(l_lwIPMgrQueueSto);
+#endif
     QS_OBJ_DICTIONARY(l_philoQueueSto[0]);
     QS_OBJ_DICTIONARY(l_philoQueueSto[1]);
     QS_OBJ_DICTIONARY(l_philoQueueSto[2]);
@@ -91,6 +93,6 @@ int main(void) {
                   l_tableQueueSto, Q_DIM(l_tableQueueSto),
                   (void *)0, 0, (QEvent *)0);
     QF_run();                                     /* run the QF application */
-#endif
+
     return 0;
 }

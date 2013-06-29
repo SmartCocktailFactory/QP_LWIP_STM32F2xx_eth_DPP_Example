@@ -202,10 +202,10 @@ void QF_onCleanup(void) {
 }
 /*..........................................................................*/
 void QK_onIdle(void) {
-                         /* toggle the blue LED on and then off, see NOTE01 */
+                         /* toggle the LED on and then off, see NOTE01 */
     QF_INT_DISABLE();
-    STM_EVAL_LEDOn (LED4);                                  /* blue LED on  */
-    STM_EVAL_LEDOff(LED4);                                  /* blue LED off */
+    omxEval_led_on(LED_1);
+    omxEval_led_off(LED_1);
     QF_INT_ENABLE();
 
 #ifdef Q_SPY
@@ -264,13 +264,13 @@ uint8_t QS_onStartup(void const *arg) {
     QS_FILTER_ON(QS_ALL_RECORDS);
 
 //    QS_FILTER_OFF(QS_QEP_STATE_EMPTY);
-//    QS_FILTER_OFF(QS_QEP_STATE_ENTRY);
-//    QS_FILTER_OFF(QS_QEP_STATE_EXIT);
-//    QS_FILTER_OFF(QS_QEP_STATE_INIT);
-//    QS_FILTER_OFF(QS_QEP_INIT_TRAN);
+    QS_FILTER_OFF(QS_QEP_STATE_ENTRY);
+    QS_FILTER_OFF(QS_QEP_STATE_EXIT);
+    QS_FILTER_OFF(QS_QEP_STATE_INIT);
+    QS_FILTER_OFF(QS_QEP_INIT_TRAN);
 //    QS_FILTER_OFF(QS_QEP_INTERN_TRAN);
 //    QS_FILTER_OFF(QS_QEP_TRAN);
-//    QS_FILTER_OFF(QS_QEP_IGNORED);
+    QS_FILTER_OFF(QS_QEP_IGNORED);
 
     QS_FILTER_OFF(QS_QF_ACTIVE_ADD);
     QS_FILTER_OFF(QS_QF_ACTIVE_REMOVE);
@@ -292,7 +292,7 @@ uint8_t QS_onStartup(void const *arg) {
     QS_FILTER_OFF(QS_QF_NEW);
     QS_FILTER_OFF(QS_QF_GC_ATTEMPT);
     QS_FILTER_OFF(QS_QF_GC);
-//    QS_FILTER_OFF(QS_QF_TICK);
+    QS_FILTER_OFF(QS_QF_TICK);
     QS_FILTER_OFF(QS_QF_TIMEEVT_ARM);
     QS_FILTER_OFF(QS_QF_TIMEEVT_AUTO_DISARM);
     QS_FILTER_OFF(QS_QF_TIMEEVT_DISARM_ATTEMPT);
