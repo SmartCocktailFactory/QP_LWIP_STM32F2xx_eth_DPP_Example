@@ -54,7 +54,8 @@ uint32_t ETH_MACDMA_Config(void) {
 	/* Enable ETHERNET clock  */
 	RCC_AHB1PeriphClockCmd(	RCC_AHB1Periph_ETH_MAC |
 			RCC_AHB1Periph_ETH_MAC_Tx |
-			RCC_AHB1Periph_ETH_MAC_Rx,
+			RCC_AHB1Periph_ETH_MAC_Rx |
+			RCC_AHB1Periph_ETH_MAC_PTP,
 			ENABLE);
 
 	/* Reset ETHERNET on AHB Bus */
@@ -187,11 +188,18 @@ void ETH_GPIO_Config(void)
         ETH_MII_TXD1/ETH_RMII_TXD1 -------> PG14   (same on Olimex STM32-P207 eval board)
                                                   */
 
-  /* Configure PA1, PA2 and PA7 */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_7;
+  /* These fields of the GPIO config are the same for all ETH pins */
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+
+  /* Configure PA1, PA2, PA3 and PA7 */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_7;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource1, GPIO_AF_ETH);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_ETH);
+  GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_ETH);
   GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_ETH);
 
 #if 0  /* alu: not used on Olimex STM32-P207 eval board */

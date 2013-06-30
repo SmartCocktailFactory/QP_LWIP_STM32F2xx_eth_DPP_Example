@@ -52,12 +52,11 @@ static union MediumEvents {
 int main(void) {
     uint8_t n;
 
-    Philo_ctor();             /* instantiate all Philosopher active objects */
-
-    Table_ctor();                    /* instantiate the Table active object */
 #if 0
-    LwIPMgr_ctor();           /* instantiate all LwIP-Manager active object */
+    Philo_ctor();             /* instantiate all Philosopher active objects */
+    Table_ctor();                    /* instantiate the Table active object */
 #endif
+    LwIPMgr_ctor();           /* instantiate all LwIP-Manager active object */
     BSP_init();                     /* initialize the Board Support Package */
 
     QF_init();     /* initialize the framework and the underlying RT kernel */
@@ -65,9 +64,7 @@ int main(void) {
                                                   /* object dictionaries... */
     QS_OBJ_DICTIONARY(l_smlPoolSto);
     QS_OBJ_DICTIONARY(l_medPoolSto);
-#if 0
     QS_OBJ_DICTIONARY(l_lwIPMgrQueueSto);
-#endif
     QS_OBJ_DICTIONARY(l_philoQueueSto[0]);
     QS_OBJ_DICTIONARY(l_philoQueueSto[1]);
     QS_OBJ_DICTIONARY(l_philoQueueSto[2]);
@@ -81,9 +78,10 @@ int main(void) {
     QF_poolInit(l_smlPoolSto, sizeof(l_smlPoolSto), sizeof(l_smlPoolSto[0]));
     QF_poolInit(l_medPoolSto, sizeof(l_medPoolSto), sizeof(l_medPoolSto[0]));
 
-    /* QActive_start(AO_LwIPMgr, 1,
+    QActive_start(AO_LwIPMgr, 1,
                   l_lwIPMgrQueueSto, Q_DIM(l_lwIPMgrQueueSto),
-                  (void *)0, 0, (QEvent *)0); alu TODO */
+                  (void *)0, 0, (QEvent *)0);
+#if 0
     for (n = 0; n < N_PHILO; ++n) {          /* start the active objects... */
         QActive_start(AO_Philo[n], (uint8_t)(n + 2),
                       l_philoQueueSto[n], Q_DIM(l_philoQueueSto[n]),
@@ -92,6 +90,7 @@ int main(void) {
     QActive_start(AO_Table, (uint8_t)(N_PHILO + 2),
                   l_tableQueueSto, Q_DIM(l_tableQueueSto),
                   (void *)0, 0, (QEvent *)0);
+#endif
     QF_run();                                     /* run the QF application */
 
     return 0;
