@@ -114,10 +114,10 @@ void BSP_init(void) {
 	// alu: TODO BSP_EXTI_Init();
 
 	/* initialize the ETH GPIO */
-	// alu: TODO ETH_GPIO_Config();
+	ETH_GPIO_Config();
 
 	/* initialize the ETH MACDMA */
-	// alu: TODO ETH_MACDMA_Config();
+	ETH_MACDMA_Config();
 
 	QS_OBJ_DICTIONARY(&l_SysTick_Handler);
 }
