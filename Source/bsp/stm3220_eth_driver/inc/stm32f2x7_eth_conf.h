@@ -68,6 +68,7 @@
 /* PHY Configuration delay */ 
 #define PHY_CONFIG_DELAY   ((uint32_t)0x00FFFFFF)
 
+#if 0  /* alu: Another PHY is used on the Olimex P207 eval board */
 /* The PHY status register value change from a PHY to another, so the user have 
    to update this value depending on the used external PHY */
 #define PHY_SR    ((uint16_t)16) /* Value for DP83848 PHY */
@@ -76,7 +77,13 @@
    have to update this value depending on the used external PHY */
 #define PHY_SPEED_STATUS            ((uint16_t)0x0002) /* Value for DP83848 PHY */
 #define PHY_DUPLEX_STATUS           ((uint16_t)0x0004) /* Value for DP83848 PHY */
+#endif
 
+/* Bits in Basic Status Register of PHY */
+#define PHY_BSR_100M_FULL_DUPLEX    ((uint16_t)(1<<14))
+#define PHY_BSR_100M_HALF_DUPLEX    ((uint16_t)(1<<13))
+#define PHY_BSR_10M_FULL_DUPLEX     ((uint16_t)(1<<12))
+#define PHY_BSR_10M_HALF_DUPLEX     ((uint16_t)(1<<11))
 
 typedef enum {FALSE = 0, TRUE = !FALSE} bool;
 

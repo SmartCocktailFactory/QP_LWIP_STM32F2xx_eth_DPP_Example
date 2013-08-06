@@ -52,7 +52,7 @@ static union MediumEvents {
 int main(void) {
     uint8_t n;
 
-#if 0
+#if 1
     Philo_ctor();             /* instantiate all Philosopher active objects */
     Table_ctor();                    /* instantiate the Table active object */
 #endif
@@ -81,7 +81,7 @@ int main(void) {
     QActive_start(AO_LwIPMgr, 1,
                   l_lwIPMgrQueueSto, Q_DIM(l_lwIPMgrQueueSto),
                   (void *)0, 0, (QEvent *)0);
-#if 0
+#if 1
     for (n = 0; n < N_PHILO; ++n) {          /* start the active objects... */
         QActive_start(AO_Philo[n], (uint8_t)(n + 2),
                       l_philoQueueSto[n], Q_DIM(l_philoQueueSto[n]),

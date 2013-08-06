@@ -107,6 +107,11 @@ uint32_t ETH_MACDMA_Config(void) {
 	/* Configure Ethernet */
 	ETH_Status = ETH_Init(&ETH_InitStructure, DP83848_PHY_ADDRESS);
 
+	/* alu: stop here if Ethernet config does not work */
+	if (ETH_Status == ETH_ERROR) {
+	  while(1);
+	}
+
 	/* Enable the Ethernet Rx and Tx Interrupts */
 	ETH_DMAITConfig(ETH_DMA_IT_NIS | ETH_DMA_IT_R | ETH_DMA_IT_T, ENABLE);
 

@@ -394,8 +394,9 @@ uint32_t ETH_Init(ETH_InitTypeDef* ETH_InitStruct, uint16_t PHYAddress) {
 		timeout = 0;
 
 		/* Read the result of the auto-negotiation */
-		RegValue = ETH_ReadPHYRegister(PHYAddress, PHY_SR);
+		RegValue = ETH_ReadPHYRegister(PHYAddress, PHY_BSR);
 
+#if 0  /* alu: modified for PHY KS8721 on Olimex P207 eval board */
 		/* Configure the MAC with the Duplex Mode fixed by the auto-negotiation process */
 		if((RegValue & PHY_DUPLEX_STATUS) != (uint32_t)RESET) {
 			/* Set Ethernet duplex mode to Full-duplex following the auto-negotiation */
@@ -413,6 +414,25 @@ uint32_t ETH_Init(ETH_InitTypeDef* ETH_InitStruct, uint16_t PHYAddress) {
 			/* Set Ethernet speed to 100M following the auto-negotiation */
 			ETH_InitStruct->ETH_Speed = ETH_Speed_100M;
 		}
+#endif
+
+		/* Configure the MAC with the Mode fixed by the auto-negotiation process */
+		if (RegValue & PHY_BSR_100M_FULL_DUPLEX) {
+		  ETH_InitStruct->ETH_Speed = ETH_Speed_100M;
+		  ETH_InitStruct->ETH_Mode = ETH_Mode_FullDuplex;
+		} else if (RegValue & PHY_BSR_100M_HALF_DUPLEX) {
+      ETH_InitStruct->ETH_Speed = ETH_Speed_100M;
+      ETH_InitStruct->ETH_Mode = ETH_Mode_HalfDuplex;
+		} else if (RegValue & PHY_BSR_10M_FULL_DUPLEX) {
+      ETH_InitStruct->ETH_Speed = ETH_Speed_10M;
+      ETH_InitStruct->ETH_Mode = ETH_Mode_FullDuplex;
+    } else if (RegValue & PHY_BSR_10M_HALF_DUPLEX) {
+      ETH_InitStruct->ETH_Speed = ETH_Speed_10M;
+      ETH_InitStruct->ETH_Mode = ETH_Mode_HalfDuplex;
+    } else {
+      return ETH_ERROR;
+    }
+
 	} else {
 		if(!ETH_WritePHYRegister(PHYAddress, PHY_BCR, ((uint16_t)(ETH_InitStruct->ETH_Mode >> 3) |
 				(uint16_t)(ETH_InitStruct->ETH_Speed >> 1)))) {
