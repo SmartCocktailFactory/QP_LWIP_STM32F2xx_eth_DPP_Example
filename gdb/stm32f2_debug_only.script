@@ -4,4 +4,3 @@ set remote hardware-watchpoint-limit 4
 set remotetimeout 60
 target remote localhost:3333
 monitor reset halt
-monitor run
