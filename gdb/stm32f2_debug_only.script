@@ -3,7 +3,5 @@ set remote hardware-breakpoint-limit 6
 set remote hardware-watchpoint-limit 4
 set remotetimeout 60
 target remote localhost:3333
-monitor halt
-monitor poll
-
-monitor soft_reset_halt
+monitor reset halt
+monitor run
