@@ -28,6 +28,7 @@
 #include "qp_port.h"
 #include "dpp.h"
 #include "bsp.h"
+#include "omx_p207_eval/device/lcd/lcd.h"
 
 /* Local-scope objects -----------------------------------------------------*/
 static QEvent const *l_tableQueueSto[N_PHILO];
@@ -52,6 +53,8 @@ static union MediumEvents {
 int main(void) {
     uint8_t n;
 
+    InitLcd();
+    TestLcd();
 #if 1
     Philo_ctor();             /* instantiate all Philosopher active objects */
     Table_ctor();                    /* instantiate the Table active object */
