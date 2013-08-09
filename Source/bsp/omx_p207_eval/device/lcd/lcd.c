@@ -424,7 +424,6 @@ void InitLcd(void) {
   LCD_RST_PORT->BSRRL = LCD_RST_MASK; /* set LCD reset signal to high */
   Delay(400000);  /* at least 5 ms */
 
-#ifdef PHILIPS_PCF8833
   // Sleep out (command 0x11)
   WriteSpiCommand(SLEEPOUT);
   // Inversion on (command 0x20)
@@ -442,36 +441,6 @@ void InitLcd(void) {
   Delay(2000);
   // Display On (command 0x29)
   WriteSpiCommand(DISPON);
-#else  /* Epson controller */
-  // Display control
-  WriteSpiCommand(DISCTL);
-  WriteSpiData(0x00); // P1: 0x00 = 2 divisions, switching period=8 (default)
-  WriteSpiData(0x20); // P2: 0x20 = nlines/4 - 1 = 132/4 - 1 = 32)
-  WriteSpiData(0x00); // P3: 0x00 = no inversely highlighted lines
-  // COM scan
-  WriteSpiCommand(COMSCN);
-  WriteSpiData(1); // P1: 0x01 = Scan 1->80, 160<-81
-  // Internal oscilator ON
-  WriteSpiCommand(OSCON);
-  // Sleep out
-  WriteSpiCommand(SLPOUT);
-  // Power control
-  WriteSpiCommand(PWRCTR);
-  WriteSpiData(0x0f); // reference voltage regulator on, circuit voltage follower on, BOOST ON
-  // Inverse display
-  WriteSpiCommand(DISINV);
-  // Data control
-  WriteSpiCommand(DATCTL);
-  WriteSpiData(0x01); // P1: 0x01 = page address inverted, column address normal, address scan in column direction
-  WriteSpiData(0x00); // P2: 0x00 = RGB sequence (default value)
-  WriteSpiData(0x02); // P3: 0x02 = Grayscale -> 16 (selects 12-bit color, type A)
-  // Voltage control (contrast setting)
-  WriteSpiCommand(VOLCTR);
-  WriteSpiData(32); // P1 = 32 volume value (experiment with this value to get the best contrast)
-  WriteSpiData(3); // P2 = 3 resistance ratio (only value that works)
-  // allow power supply to stabilize
-  Delay(100000);
-#endif
 }
 #if 0
 // *****************************************************************************
