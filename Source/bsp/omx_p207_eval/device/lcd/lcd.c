@@ -377,7 +377,7 @@ void InitLcd(void) {
   WriteSpiData(0x03); // 0x03 = 12 bits-per-pixel
   // Memory access controler (command 0x36)
   WriteSpiCommand(MADCTL);
-  WriteSpiData(0x88); // 0x80 = mirror y, reverse rgb
+  WriteSpiData(0x80); // 0x80 = mirror y
   // Write contrast (command 0x25)
   WriteSpiCommand(SETCON);
   WriteSpiData(0x30); // contrast 0x30
@@ -670,10 +670,10 @@ void LCDSetRect(int x0, int y0, int x1, int y1, unsigned char fill, int color) {
     WriteSpiCommand(RAMWR);
     // loop on total number of pixels / 2
     for (i = 0; i < ((((xmax - xmin + 1) * (ymax - ymin + 1)) / 2) + 1); i++) {
-    // use the color value to output three data bytes covering two pixels
-    WriteSpiData((color >> 4) & 0xFF);
-    WriteSpiData(((color & 0xF) << 4) | ((color >> 8) & 0xF));
-    WriteSpiData(color & 0xFF);
+      // use the color value to output three data bytes covering two pixels
+      WriteSpiData((color >> 4) & 0xFF);
+      WriteSpiData(((color & 0xF) << 4) | ((color >> 8) & 0xF));
+      WriteSpiData(color & 0xFF);
     }
   } else {
     // best way to draw un unfilled rectangle is to draw four lines
