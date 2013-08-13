@@ -345,6 +345,9 @@ void InitLcd(void) {
   Delay(2000);
   // Display On (command 0x29)
   WriteSpiCommand(DISPON);
+
+  LCDClearScreen();
+  Backlight(BKLGHT_LCD_ON);
 }
 #if 0
 // *****************************************************************************

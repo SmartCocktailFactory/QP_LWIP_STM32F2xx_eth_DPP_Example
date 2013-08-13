@@ -30,6 +30,7 @@
 #include "bsp.h"                       /* Board Support Package header file */
 #include "stm32_eval.h"
 #include <stdio.h>
+#include <omx_p207_eval/device/lcd/lcd.h>
 
 
 Q_DEFINE_THIS_FILE
@@ -204,6 +205,10 @@ QState Table_serving(Table *me, QEvent const *e) {
                      
 void Table_displayInit(Table *me) {
     /* init LCD display here, if available */
+    LCDPutStr("IP:", 110, 5, SMALL, BLACK, WHITE);
+    LCDPutStr("DPP:", 80, 5, LARGE, BLUE, WHITE);
+    LCDPutStr("CGI:", 50, 5, LARGE, RED, WHITE);
+    LCDPutStr("UDP:", 20, 5, LARGE, BROWN, WHITE);
 
     if (QS_INIT((void *)0) == 0) {    /* initialize the QS software tracing */
         Q_ERROR();
@@ -216,9 +221,8 @@ void Table_displayInit(Table *me) {
 
 /*..........................................................................*/
 static void Table_displayPhilStat(Table *me, uint8_t n, char const *stat) {
-#if 0  /* alu: disabled because no LCD display is available */
-	LCD_DisplayChar(Line6, (3*16*n + 5*16), stat[0]);
-#endif
+    LCDPutChar(stat[0], 80, 40+10*n, LARGE, BLUE, WHITE);
+
     QS_BEGIN(PHILO_STAT, AO_Philo[n])  /* application-specific record begin */
         QS_U8(1, n);                                  /* Philosopher number */
         QS_STR(stat);                                 /* Philosopher status */
@@ -226,24 +230,19 @@ static void Table_displayPhilStat(Table *me, uint8_t n, char const *stat) {
 }
 /*..........................................................................*/
 static void Table_displayIPAddr(Table *me, char const *ip_addr) {
-#if 0  /* alu: disabled because no LCD display is available */
-    LCD_DisplayStringLine(Line3, ip_addr                 );
-#endif
+    LCDPutStr(ip_addr, 110, 30, SMALL, BLACK, WHITE);
 }
 /*..........................................................................*/
 void Table_displayCgiText(Table *me, char const *text) {
-#if 0  /* alu: disabled because no LCD display is available */
-    LCD_DisplayStringLine(Line4, text                 );
-#endif
+    LCDPutStr(text, 50, 40, LARGE, RED, WHITE);
+
     QS_BEGIN(CGI_TEXT, 0)              /* application-specific record begin */
         QS_STR(text);                                          /* User text */
     QS_END()
 }
 /*..........................................................................*/
 void Table_displayUdpText(Table *me, char const *text) {
-#if 0  /* alu: disabled because no LCD display is available */
-   LCD_DisplayStringLine(Line5, text                 );
-#endif
+    LCDPutStr(text, 20, 40, LARGE, BROWN, WHITE);
     QS_BEGIN(UDP_TEXT, 0)              /* application-specific record begin */
         QS_STR(text);                                          /* User text */
     QS_END()
