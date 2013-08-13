@@ -35,6 +35,7 @@
 #include "stm32_eval.h"
 #include "stm322xg_eval.h"
 #include <omx_p207_eval/device/led/led.h>
+#include <omx_p207_eval/device/lcd/lcd.h>
 #include <omx_p207_eval/device/rs232/rs232.h>
 #include "qp_port.h"
 #include "dpp.h"
@@ -100,6 +101,9 @@ void BSP_init(void) {
 
 	/* initialize LEDs on Olimex P207 eval board */
 	omxEval_led_init();
+
+	/* initialize LCD on Olimex P207 eval board */
+  InitLcd();
 
   /* initialize RS-232 serial port on Olimex P207 eval board */
   omxEval_rs232_init();

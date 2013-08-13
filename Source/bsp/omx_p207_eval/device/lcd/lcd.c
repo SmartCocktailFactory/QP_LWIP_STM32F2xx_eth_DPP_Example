@@ -171,8 +171,6 @@ void InitLcdPins(void)
   GPIO_InitStructure.GPIO_Pin = LCD_BL_MASK;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(LCD_BL_PORT, &GPIO_InitStructure);
-
-  LCD_BL_PORT->BSRRL = LCD_BL_MASK;  // backlight on
 }
 
 
