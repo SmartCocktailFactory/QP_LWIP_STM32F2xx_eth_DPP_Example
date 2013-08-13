@@ -146,9 +146,7 @@ void Delay (volatile unsigned long a);
  *************************************************************************/
 void InitLcdPins(void)
 {
-  TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
   GPIO_InitTypeDef GPIO_InitStructure;
-  TIM_OCInitTypeDef TIM_OCInitStructure;
 
   /* Enable GPIO clock and release reset*/
   RCC_AHB1PeriphClockCmd(LCD_RST_CLK | LCD_BL_CLK, ENABLE);
@@ -165,49 +163,16 @@ void InitLcdPins(void)
 
   LCD_RST_PORT->BSRRH = LCD_RST_MASK; /* set LCD reset signal to low */
 
-  /* LCD backlight Init*/
-  // PWM DAC (TIM3/CH3)
+  /* LCD backlight pin init*/
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
 
   GPIO_InitStructure.GPIO_Pin = LCD_BL_MASK;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(LCD_BL_PORT, &GPIO_InitStructure);
 
-  GPIO_PinAFConfig(LCD_BL_PORT,LCD_BL_PIN_SOURCE,LCD_BL_PIN_AF);
-
-  // Init PWM TIM3
-  // Enable Timer3 clock and release reset
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);
-  RCC_APB1PeriphResetCmd(RCC_APB1Periph_TIM3,DISABLE);
-
-  TIM_InternalClockConfig(TIM3);
-
-  // Time base configuration
-  TIM_TimeBaseStructure.TIM_Prescaler = 140;
-  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-  TIM_TimeBaseStructure.TIM_Period = 0xFF; // 8 bit resolution
-  TIM_TimeBaseStructure.TIM_ClockDivision = 0;
-  TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;
-  TIM_TimeBaseInit(TIM3,&TIM_TimeBaseStructure);
-
-  // Channel 4 Configuration in PWM mode
-  TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
-  TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-  TIM_OCInitStructure.TIM_OutputNState = TIM_OutputNState_Enable;
-  TIM_OCInitStructure.TIM_Pulse = 0x00;
-  TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
-  TIM_OCInitStructure.TIM_OCNPolarity = TIM_OCNPolarity_High;
-  TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Set;
-  TIM_OCInitStructure.TIM_OCNIdleState = TIM_OCIdleState_Reset;
-  TIM_OC3Init(TIM3,&TIM_OCInitStructure);
-  // Double buffered
-  TIM_ARRPreloadConfig(TIM3,ENABLE);
-  // TIM3 counter enable
-  TIM_Cmd(TIM3,ENABLE);
-
-  TIM3->CCR3 = 0x80;  // on
+  LCD_BL_PORT->BSRRL = LCD_BL_MASK;  // backlight on
 }
 
 
@@ -338,7 +303,7 @@ void WriteSpiData(volatile unsigned int data) {
 // Turns the backlight on and off
 //
 // Inputs: state - 1 = backlight on
-// 2 = backlight off
+// 0 = backlight off
 //
 //
 // Author: Olimex, James P Lynch July 7, 2007; adapted for Olimex P207 board by Adrian Lutz
@@ -370,8 +335,6 @@ void InitLcd(void) {
 
   // Sleep out (command 0x11)
   WriteSpiCommand(SLEEPOUT);
-  // Inversion on (command 0x20)
-  //WriteSpiCommand(INVON); // seems to be required for this controller
   // Color Interface Pixel Format (command 0x3A)
   WriteSpiCommand(COLMOD);
   WriteSpiData(0x03); // 0x03 = 12 bits-per-pixel
@@ -929,6 +892,15 @@ void TestLcd(void) {
   YELLOW, BROWN, ORANGE, PINK };
   char *TempChar[11] = { "White", "Black", "Red", "Green", "Blue", "Cyan",
   "Magenta", "Yellow", "Brown", "Orange", "Pink" };
+
+  // ***************************************************************
+  // * backlight test - switch backlight on and off
+  // ***************************************************************
+  Backlight(BKLGHT_LCD_ON);
+  Delay(4000000);
+  Backlight(BKLGHT_LCD_OFF);
+  Delay(4000000);
+  Backlight(BKLGHT_LCD_ON);
 
   // ***************************************************************
   // * color test - show boxes of different colors

@@ -63,7 +63,7 @@
 
 // backlight control
 #define BKLGHT_LCD_ON 1
-#define BKLGHT_LCD_OFF 2
+#define BKLGHT_LCD_OFF 0
 // Booleans
 #define NOFILL 0
 #define FILL 1
