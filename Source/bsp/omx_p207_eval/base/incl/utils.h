@@ -3,17 +3,18 @@
                               All Rights Reserved
  ****************************************************************************************
 
-  DESCRIPTION:        Control LED's on Olimex P207 eval board.
+  DESCRIPTION:        Utility functions for Olimex P207 eval board.
 
 
  ****************************************************************************************
  ****************************************************************************************/
-#ifndef LED_H_
-#define LED_H_
+#ifndef UTILS_H_
+#define UTILS_H_
 
 /****************************************************************************************
  Includes
 *****************************************************************************************/
+#include <stdint.h>
 
 
 /****************************************************************************************
@@ -29,13 +30,7 @@
 /****************************************************************************************
  Structs and typedefs
 *****************************************************************************************/
-typedef enum OmxEvalLed
-{
-  LED_1 = 0,
-  LED_2,
-  LED_3,
-  LED_4
-} OmxEvalLed;
+
 
 /****************************************************************************************
  Macros
@@ -46,34 +41,20 @@ typedef enum OmxEvalLed
  Public function declarations
 *****************************************************************************************/
 /**
- * Initialize the LED's on the Olimex eval board.
- */
-void omxEval_led_init(void);
-
-/**
- * Switch selected LED on.
+ * Generate a delay in microseconds.
+ * The function busy waits for the specified delay and then returns.
  *
- * @param led the LED to be switched on.
+ * @param delayInMicroseconds the delay in microseconds
  */
-void omxEval_led_on(OmxEvalLed led);
+void delayUs(uint32_t delayInMicroseconds);
 
 /**
- * Switch selected LED off.
+ * Generate a delay in milliseconds.
+ * The function busy waits for the specified delay and then returns.
  *
- * @param led the LED to be switched off.
+ * @param delayInMilliseconds the delay in milliseconds
  */
-void omxEval_led_off(OmxEvalLed led);
+void delayMs(uint32_t delayInMilliseconds);
 
-/**
- * Toggle selected LED.
- *
- * @param led the LED to be toggled.
- */
-void omxEval_led_toggle(OmxEvalLed led);
 
-/**
- * Test LED code.
- */
-void omxEval_led_test(void);
-
-#endif /* LED_H_ */
+#endif
